@@ -16,6 +16,8 @@ files.forEach(file => {
         fileNamesSet.add(file);
     }
 });
+fileNamesSet.add("1012-artisan.png")
+fileNamesSet.add("1013-masterpiece.png")
 
 export const getFileNameSet = (): Set<string> => {
     return fileNamesSet;
