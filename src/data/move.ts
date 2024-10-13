@@ -127,8 +127,8 @@ type UserMoveConditionFunc = (user: Pokemon, move: Move) => boolean;
 export default class Move implements Localizable {
   public id: Moves;
   public name: string;
-  private _type: Type;
-  private _category: MoveCategory;
+  public _type: Type;
+  public _category: MoveCategory;
   public moveTarget: MoveTarget;
   public power: number;
   public accuracy: number;
@@ -141,8 +141,8 @@ export default class Move implements Localizable {
   public attrs: MoveAttr[] = [];
   private conditions: MoveCondition[] = [];
   /** The move's {@linkcode MoveFlags} */
-  private flags: number = 0;
-  private nameAppend: string = "";
+  public flags: number = 0;
+  public nameAppend: string = "";
 
   constructor(id: Moves, type: Type, category: MoveCategory, defaultMoveTarget: MoveTarget, power: number, accuracy: number, pp: number, chance: number, priority: number, generation: number) {
     this.id = id;

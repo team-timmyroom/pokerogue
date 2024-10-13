@@ -32,7 +32,7 @@ initStatsKeys();
 initPokemonPrevolutions();
 initBiomes();
 initEggMoves();
-initPokemonForms();
+// initPokemonForms();
 initSpecies();
 initMoves();
 initAbilities();

@@ -33,7 +33,7 @@ import BattleScene from "#app/battle-scene";
 export class Ability implements Localizable {
   public id: Abilities;
 
-  private nameAppend: string;
+  public nameAppend: string;
   public name: string;
   public description: string;
   public generation: integer;
