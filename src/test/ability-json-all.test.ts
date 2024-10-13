@@ -1,0 +1,80 @@
+import { describe, it } from "vitest";
+import * as fs from "fs";
+import * as path from "path";
+import i18next from "i18next";
+import { Abilities } from "#app/enums/abilities.js";
+import { allAbilities } from "#app/data/ability.ts";
+import { starterPassiveAbilities, allSpecies } from "#app/data/pokemon-species.js";
+import { Species } from "#enums/species";
+import * as Utils from "#app/test/test-util.ts";
+
+export interface AbilityData {
+  _id: string,
+  name: string,
+  koName: string,
+  realased: string,
+  description: string,
+  generation: number,
+  pokemonIds: string[],
+  isBypassFaint: boolean,
+  isIgnorable: boolean
+};
+
+// 각 특성에 대해 JSON 파일을 생성하는 함수
+const generateAbilityJsonFiles = () => {
+  const fileNamesSet = Utils.getFileNameSet();
+
+  const aaability: AbilityData[] = [];
+  for (const a of allAbilities) {
+    if (a.id == Abilities.NONE) {
+      continue;
+    }
+    const NAME = a.name;
+    i18next.changeLanguage("ko");
+    const i18nKey = Abilities[a.id].split("_").filter(f => f).map((f, i) => i ? `${f[0]}${f.slice(1).toLowerCase()}` : f.toLowerCase()).join("") as string;
+    a.name = a.id ? `${i18next.t(`ability:${i18nKey}.name`) as string}` : "";
+    a.description = a.id ? i18next.t(`ability:${i18nKey}.description`) as string : "";
+
+    // pokemon id 세팅
+    const ret: string[] = [];
+    for (let i = 0; i < allSpecies.length; i++) {
+      const y = allSpecies[i];
+      const passive = starterPassiveAbilities[y.getRootSpeciesId()];
+      if (y.forms.length !== 0) {
+        for (const form of y.forms) {
+          if (form.ability1 === a.id || form.ability2 === a.id || form.abilityHidden === a.id || a.id === passive) {
+            if (Utils.containsFileNamesSetWithForm(form, y)) {
+              ret.push(Utils.getPokemonIdWithForm(form, y));
+            }
+          }
+        }
+      } else if (y.ability1 === a.id || y.ability2 === a.id || y.abilityHidden === a.id || passive === a.id) {
+        if (Utils.containsFileNamesSet(y)) {
+          ret.push(Utils.getPokemonId(y));
+        }
+      }
+    }
+
+    const abilityData: AbilityData = {
+      _id: Abilities[a.id].toLowerCase(),
+      name: NAME,
+      koName: a.name,
+      realased: a.nameAppend,
+      description: a.description,
+      generation: a.generation,
+      pokemonIds: ret,
+      isBypassFaint: a.isBypassFaint ? a.isBypassFaint : false,
+      isIgnorable: a.isIgnorable ? a.isIgnorable : false
+    }
+    aaability.push(abilityData);
+  }
+  const jsonFilePath = path.join(__dirname, "ability-json-all.json");
+  fs.writeFileSync(jsonFilePath, JSON.stringify(aaability, null, 2));
+};
+
+// 테스트 스위트 추가
+describe("Ability JSON 파일 생성 테스트", () => {
+  it("JSON 파일이 올바르게 생성되는지 테스트", () => {
+    generateAbilityJsonFiles();
+  });
+});
