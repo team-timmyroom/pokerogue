@@ -88,7 +88,7 @@ const generateMoveJsonFiles = () => {
       effectChance: move.chance,
       prioirty: move.priority,
       generation: move.generation,
-      realased: move.nameAppend,
+      released: move.nameAppend,
       flags: flagss,
       pokemonIds: mmm
     }
@@ -113,7 +113,7 @@ export interface MoveData {
   effectChance: number,
   prioirty: number,
   generation: number,
-  realased: string,
+  released: string,
   flags: string[],
   pokemonIds: string[]
 };
