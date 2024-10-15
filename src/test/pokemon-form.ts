@@ -36,8 +36,8 @@ export const generateFormChangeInfo = (): Map<String, FormChangeInfo[]> => {
     // console.log(formchangelist);
     const formchangeinfolist: FormChangeInfo[] = formchangelist.map(fc => ({
       from: Species[key].toLowerCase(),
-      previousForm: fc.preFormKey,
-      currentForm: fc.formKey,
+      previousForm: fc.preFormKey.toLowerCase().replace(/ |-/g, "_"),
+      currentForm: fc.formKey.toLowerCase().replace(/ |-/g, "_"),
       item: generateItem(fc)
     }));
 
