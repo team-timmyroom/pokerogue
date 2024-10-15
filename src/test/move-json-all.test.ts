@@ -10,6 +10,7 @@ import { starterPassiveAbilities, allSpecies } from "#app/data/pokemon-species.j
 import { speciesEggMoves } from "#app/data/egg-moves";
 import { pokemonSpeciesLevelMoves, pokemonFormLevelMoves } from "#app/data/pokemon-level-moves.js";
 import { tmSpecies } from "#app/data/tms.js";
+import { generateCommonId } from "#app/test/pokemon-evolution.js";
 import * as Utils from "#app/test/test-util.ts";
 
 // 각 기술에 대해 JSON 파일을 생성하는 함수
@@ -18,6 +19,9 @@ const generateMoveJsonFiles = () => {
   const aamove: MoveData[] = [];
   for (const m in allMoves) {
     const move = allMoves[m];
+    if (move.id === Moves.NONE) {
+      continue;
+    }
     const NAME = move.name;
     i18next.changeLanguage("ko");
     const i18nKey = Moves[move.id].split("_").filter(f => f).map((f, i) => i ? `${f[0]}${f.slice(1).toLowerCase()}` : f.toLowerCase()).join("") as unknown as string;
@@ -41,7 +45,7 @@ const generateMoveJsonFiles = () => {
       } else {
         if (eggMoves.includes(move.id) || moves.includes(move.id)) {
           if (Utils.containsFileNamesSet(spe)) {
-            mmm.push(Utils.getPokemonId(spe));
+            mmm.push(generateCommonId(spe.speciesId));
           }
         }
       }
@@ -60,7 +64,7 @@ const generateMoveJsonFiles = () => {
           }
         } else {
           if (!mmm.includes(Species[tt].toLowerCase())) {
-            mmm.push(Species[tt].toLowerCase());
+            mmm.push(generateCommonId(tt));
           }
         }
       }
