@@ -10,7 +10,6 @@ import { starterPassiveAbilities, allSpecies } from "#app/data/pokemon-species.j
 import { speciesEggMoves } from "#app/data/egg-moves";
 import { pokemonSpeciesLevelMoves, pokemonFormLevelMoves } from "#app/data/pokemon-level-moves.js";
 import { tmSpecies } from "#app/data/tms.js";
-import { generateCommonId } from "#app/test/pokemon-evolution.js";
 import * as Utils from "#app/test/test-util.ts";
 
 // 각 기술에 대해 JSON 파일을 생성하는 함수
@@ -45,7 +44,7 @@ const generateMoveJsonFiles = () => {
       } else {
         if (eggMoves.includes(move.id) || moves.includes(move.id)) {
           if (Utils.containsFileNamesSet(spe)) {
-            mmm.push(generateCommonId(spe.speciesId));
+            mmm.push(Utils.generateCommonId(spe.speciesId));
           }
         }
       }
@@ -58,13 +57,15 @@ const generateMoveJsonFiles = () => {
         if (Array.isArray(tt)) {
           const ze = tt[0];
           for (let j = 1; j < tt.length; j++) {
-            if (!mmm.includes(Species[ze].toLowerCase() + "_" + tt[j].toLowerCase().replace(/ |-/g, "_"))) {
-              mmm.push(Species[ze].toLowerCase() + "_" + tt[j].toLowerCase().replace(/ |-/g, "_"));
+            const tail = tt[j] !== "" ? "_" + tt[j].toLowerCase().replace(/ |-/g, "_") : "";
+            var ffff = Utils.getFileNameSet();
+            if (ffff.has(Species[ze].toLowerCase() + tail) && !mmm.includes(Species[ze].toLowerCase() + tail)) {
+              mmm.push(Species[ze].toLowerCase() + tail);
             }
           }
         } else {
           if (!mmm.includes(Species[tt].toLowerCase())) {
-            mmm.push(generateCommonId(tt));
+            mmm.push(Utils.generateCommonId(tt));
           }
         }
       }

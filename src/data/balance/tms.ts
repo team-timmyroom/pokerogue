@@ -61471,7 +61471,7 @@ export const tmSpecies: TmSpecies = {
     Species.GALAR_SLOWKING,
     [
       Species.TOXTRICITY,
-      "low-key",
+      "lowkey",
     ],
   ],
   [Moves.ELECTRIC_TERRAIN]: [

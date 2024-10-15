@@ -188,7 +188,7 @@ const generatePokemonJsonFiles = () => {
         formpokemonData.friendship = form.baseFriendship;
         formpokemonData.types = formtypelist;
         formpokemonData.normalAbilityIds = formabilitylist;
-        formpokemonData.hiddenAbilityId = form.abilityHidden == Abilities.NONE ? "" : Abilities[form.abilityHidden].toLowerCase();
+        formpokemonData.hiddenAbilityId = form.abilityHidden === Abilities.NONE ? "" : Abilities[form.abilityHidden].toLowerCase();
         formpokemonData.passiveAbilityId = starterPassiveAbilities[form.getRootSpeciesId()] == Abilities.NONE ? "" : Abilities[starterPassiveAbilities[form.getRootSpeciesId()]].toLowerCase();
         formpokemonData.generation = form.generation;
         formpokemonData.legendary = legend;
@@ -307,7 +307,7 @@ const generatePokemonJsonFiles = () => {
       pokemonData.friendship = pokemon.baseFriendship;
       pokemonData.types = typelist;
       pokemonData.normalAbilityIds = abilitylist;
-      pokemonData.hiddenAbilityId = Abilities[pokemon.abilityHidden].toLowerCase();
+      pokemonData.hiddenAbilityId = pokemon.abilityHidden === Abilities.NONE ? "" : Abilities[pokemon.abilityHidden].toLowerCase();
       pokemonData.passiveAbilityId = Abilities[starterPassiveAbilities[pokemon.getRootSpeciesId()]].toLowerCase();
       pokemonData.generation = pokemon.generation;
       pokemonData.legendary = legend;

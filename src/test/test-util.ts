@@ -4,6 +4,7 @@ import { Species } from "#enums/species";
 import PokemonSpecies, { PokemonForm } from "#app/data/pokemon-species.js";
 import { pokemonSpeciesLevelMoves, pokemonFormLevelMoves } from "#app/data/pokemon-level-moves.js";
 import { Moves } from "#app/enums/moves";
+import { getPokemonSpecies } from "#app/data/pokemon-species";
 
 const p = require("path");
 const f = require("fs");
@@ -58,3 +59,14 @@ export const getPokemonFormLevelMoves = (form: PokemonForm, species: PokemonSpec
     }
     return ret2;
 }
+
+export const generateCommonId = (species: Species) => {
+    var spe = getPokemonSpecies(species);
+    var fs = spe.forms;
+    var f = fs[0];
+    if (spe.forms.length !== 0) {
+        return getPokemonIdWithForm(f, spe);
+    } else {
+        return getPokemonId(spe);
+    }
+};
