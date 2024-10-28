@@ -16,6 +16,7 @@ import { tmSpecies } from "#app/data/tms.js";
 import { generateEvolutionChains, getEvolutionsById } from "#app/test/pokemon-evolution.ts";
 import { generateFormChangeInfo, FormChangeInfo } from "#app/test/pokemon-form.ts";
 import { getFileNameSet } from "#app/test/test-util.ts";
+import * as Utils from "#app/test/test-util.ts";
 
 // 각 포켓몬에 대해 JSON 파일을 생성하는 함수
 const generatePokemonJsonFiles = () => {
@@ -76,6 +77,7 @@ const generatePokemonJsonFiles = () => {
     // form에 따른 포켓몬 정보 세팅
     if (pokemon.forms.length !== 0) {
       for (const form of pokemon.forms) {
+        // console.log(Utils.getName("ko", pokemon, form.formIndex));
         // 포켓몬 데이터 형식
         const formpokemonData = {
           _id: "",
@@ -179,11 +181,11 @@ const generatePokemonJsonFiles = () => {
         formpokemonData._id = Species[form.speciesId].toLowerCase() + tail;
         formpokemonData.imageId = Species[form.speciesId].toLowerCase() + imageTail.toLowerCase().replace(/ |-/g, "_");
         formpokemonData.pokedexNumber = form.speciesId;
-        formpokemonData.name = Species[form.speciesId].toLowerCase() + tail;
-        formpokemonData.koName = FORMKONAME;
-        formpokemonData.speciesName = Species[form.speciesId].toLowerCase();
+        formpokemonData.name = Utils.getSName("en", pokemon) + (Utils.getName("en", pokemon, form.formIndex) === "" ? "" : " " + Utils.getName("en", pokemon, form.formIndex));
+        formpokemonData.koName = Utils.getSName("ko", pokemon) + (Utils.getName("ko", pokemon, form.formIndex) === "" ? "" : " " + Utils.getName("ko", pokemon, form.formIndex));
+        formpokemonData.speciesName = Utils.getSName("ko", pokemon);
         formpokemonData.canChangeForm = pokemon.canChangeForm;
-        formpokemonData.formName = form.formName.toLowerCase().replace(/ |-/g, "_");
+        formpokemonData.formName = Utils.getName("ko", pokemon, form.formIndex);
         formpokemonData.baseExp = form.baseExp;
         formpokemonData.friendship = form.baseFriendship;
         formpokemonData.types = formtypelist;
@@ -298,9 +300,9 @@ const generatePokemonJsonFiles = () => {
       pokemonData._id = Species[pokemon.speciesId].toLowerCase();
       pokemonData.imageId = Species[pokemon.speciesId].toLowerCase();
       pokemonData.pokedexNumber = pokemon.speciesId;
-      pokemonData.name = Species[pokemon.speciesId].toLowerCase();
-      pokemonData.koName = KONAME;
-      pokemonData.speciesName = Species[pokemon.speciesId].toLowerCase();
+      pokemonData.name = Utils.getSName("en", pokemon);
+      pokemonData.koName = Utils.getSName("ko", pokemon);
+      pokemonData.speciesName = Utils.getSName("ko", pokemon);
       pokemonData.canChangeForm = pokemon.canChangeForm;
       pokemonData.formName = "";
       pokemonData.baseExp = pokemon.baseExp;

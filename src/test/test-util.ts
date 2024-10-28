@@ -1,10 +1,14 @@
 import * as fs from "fs";
 import * as path from "path";
+import i18next from "i18next";
 import { Species } from "#enums/species";
-import PokemonSpecies, { PokemonForm } from "#app/data/pokemon-species.js";
+import { Abilities } from "#app/enums/abilities.js";
+import PokemonSpecies, { PokemonForm, SpeciesFormKey } from "#app/data/pokemon-species.js";
 import { pokemonSpeciesLevelMoves, pokemonFormLevelMoves } from "#app/data/pokemon-level-moves.js";
+import { SpeciesFormChange } from "#app/data/pokemon-forms.js";
 import { Moves } from "#app/enums/moves";
 import { getPokemonSpecies } from "#app/data/pokemon-species";
+import { Console } from "console";
 
 const p = require("path");
 const f = require("fs");
@@ -70,3 +74,68 @@ export const generateCommonId = (species: Species) => {
         return getPokemonId(spe);
     }
 };
+
+export const getSName = (lan: string, species: PokemonSpecies) => {
+    i18next.changeLanguage(lan);
+    return i18next.t(`pokemon:${Species[species.speciesId].toLowerCase()}`);
+}
+
+export const getName = (lan: string, species: PokemonSpecies, formIndex: integer) => {
+    var soso = ["mega", "mega-x", "mega-y", "primal", "eternamax", "gigantamax"];
+
+    const formKey = species.forms[formIndex].formKey;
+    i18next.changeLanguage(lan);
+    if (!soso.includes(formKey)) {
+        // console.log("dgs" + " " + formKey + " " + Species[species.speciesId]);
+        const formText = capitalizeString(formKey, "-", false, false) || "";
+        const speciesName = capitalizeString(Species[species.speciesId], "_", true, false);
+
+        let formName = "";
+        if (species.speciesId === Species.ARCEUS) {
+            formName = i18next.t(`pokemonInfo:Type.${formText?.toUpperCase()}`);
+        } else {
+            const i18key = `pokemonForm:${speciesName}${formText}`;
+            formName = i18next.exists(i18key) ? i18next.t(i18key) : formText;
+        }
+        return formName;
+    }
+
+    if (formIndex !== undefined && species.forms.length) {
+        const form = species.forms[formIndex];
+        let key: string | null;
+        switch (form.formKey) {
+            case SpeciesFormKey.MEGA:
+            case SpeciesFormKey.PRIMAL:
+            case SpeciesFormKey.ETERNAMAX:
+            case SpeciesFormKey.MEGA_X:
+            case SpeciesFormKey.MEGA_Y:
+                key = form.formKey;
+                break;
+            default:
+                if (form.formKey.indexOf(SpeciesFormKey.GIGANTAMAX) > -1) {
+                    key = "gigantamax";
+                } else {
+                    key = null;
+                }
+        }
+
+        if (key) {
+            i18next.changeLanguage(lan);
+            return i18next.t(`battlePokemonForm:${key}`, { pokemonName: species.name });
+        }
+    }
+    return species.name;
+}
+
+export function capitalizeString(str: string, sep: string, lowerFirstChar: boolean = true, returnWithSpaces: boolean = false) {
+    if (str) {
+        const splitedStr = str.toLowerCase().split(sep);
+
+        for (let i = +lowerFirstChar; i < splitedStr?.length; i++) {
+            splitedStr[i] = splitedStr[i].charAt(0).toUpperCase() + splitedStr[i].substring(1);
+        }
+
+        return returnWithSpaces ? splitedStr.join(" ") : splitedStr.join("");
+    }
+    return null;
+}
