@@ -5,7 +5,7 @@ import {
   SpeciesEvolution,
   SpeciesFormEvolution,
   EvolutionItem,
-} from "#app/data/pokemon-evolutions.js";
+} from "#app/data/balance/pokemon-evolutions.js";
 import { getPokemonSpecies } from "#app/data/pokemon-species";
 
 type ParsedEvolution = {

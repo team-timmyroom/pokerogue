@@ -2,7 +2,7 @@ import { describe, it } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
 import i18next from "i18next";
-import { getBiomeName, biomePokemonPools, BiomePoolTier, biomeLinks, biomeTrainerPools } from "#app/data/biomes.js";
+import { getBiomeName, biomePokemonPools, BiomePoolTier, biomeLinks, biomeTrainerPools } from "#app/data/balance/biomes.js";
 import { getPokemonSpecies } from "#app/data/pokemon-species";
 import { Species } from "#app/enums/species.js";
 import { Biome } from "#app/enums/biome.js";

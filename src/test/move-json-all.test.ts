@@ -6,10 +6,10 @@ import { Species } from "#app/enums/species.js";
 import { Moves } from "#app/enums/moves";
 import { Type } from "#app/data/type";
 import { MoveCategory, MoveTarget, allMoves, MoveFlags } from "#app/data/move.js";
-import { starterPassiveAbilities, allSpecies } from "#app/data/pokemon-species.js";
-import { speciesEggMoves } from "#app/data/egg-moves";
-import { pokemonSpeciesLevelMoves, pokemonFormLevelMoves } from "#app/data/pokemon-level-moves.js";
-import { tmSpecies } from "#app/data/tms.js";
+import { allSpecies } from "#app/data/pokemon-species.js";
+import { speciesEggMoves } from "#app/data/balance/egg-moves";
+import { pokemonSpeciesLevelMoves, pokemonFormLevelMoves } from "#app/data/balance/pokemon-level-moves.js";
+import { tmSpecies } from "#app/data/balance/tms.js";
 import * as Utils from "#app/test/test-util.ts";
 
 // 각 기술에 대해 JSON 파일을 생성하는 함수

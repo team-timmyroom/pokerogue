@@ -4,7 +4,8 @@ import * as path from "path";
 import i18next from "i18next";
 import { Abilities } from "#app/enums/abilities.js";
 import { allAbilities } from "#app/data/ability.ts";
-import { starterPassiveAbilities, allSpecies } from "#app/data/pokemon-species.js";
+import { allSpecies } from "#app/data/pokemon-species.js";
+import { starterPassiveAbilities } from "#app/data/balance/passives";
 import { Species } from "#enums/species";
 import * as Utils from "#app/test/test-util.ts";
 
