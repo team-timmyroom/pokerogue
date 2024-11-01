@@ -10,6 +10,7 @@ import { SpeciesFormChange } from "#app/data/pokemon-forms.js";
 import { Moves } from "#app/enums/moves";
 import { getPokemonSpecies } from "#app/data/pokemon-species";
 import { Console } from "console";
+import { vi } from "vitest";
 
 const p = require("path");
 const f = require("fs");
@@ -85,6 +86,7 @@ export const getName = (lan: string, species: PokemonSpecies, formIndex: integer
     var soso = ["mega", "mega-x", "mega-y", "primal", "eternamax", "gigantamax"];
 
     const formKey = species.forms[formIndex].formKey;
+    
     i18next.changeLanguage(lan);
     if (!soso.includes(formKey)) {
         // console.log("dgs" + " " + formKey + " " + Species[species.speciesId]);
@@ -118,6 +120,12 @@ export const getName = (lan: string, species: PokemonSpecies, formIndex: integer
                 } else {
                     key = null;
                 }
+        }
+        if (formKey === "mega-x") {
+            return i18next.t(`battlePokemonForm:${"megax"}`, { pokemonName: species.name });
+        }
+        if (formKey === "mega-y") {
+            return i18next.t(`battlePokemonForm:${"megay"}`, { pokemonName: species.name });
         }
 
         if (key) {

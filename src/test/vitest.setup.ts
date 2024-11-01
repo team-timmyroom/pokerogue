@@ -39,9 +39,20 @@ vi.mock("i18next", async (importOriginal) => {
   const { http, HttpResponse } = await import("msw");
 
   global.i18nServer = setupServer(
+    
+    http.get("/locales/ko/*", async (req) => {
+      const filename = req.params[0];
+      try {
+        const json = await import(`../../public/locales/ko/${req.params[0]}`);
+        console.log("Loaded locale", filename);
+        return HttpResponse.json(json);
+      } catch (err) {
+        console.log(`Failed to load locale ${filename}!`, err);
+        return HttpResponse.json({});
+      }
+    }),
     http.get("/locales/en/*", async (req) => {
       const filename = req.params[0];
-
       try {
         const json = await import(`../../public/locales/en/${req.params[0]}`);
         console.log("Loaded locale", filename);

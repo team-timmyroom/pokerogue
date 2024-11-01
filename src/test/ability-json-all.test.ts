@@ -32,8 +32,11 @@ const generateAbilityJsonFiles = () => {
     }
     const NAME = a.name;
     i18next.changeLanguage("ko");
+    // i18next.loadLanguages("ko");
     const i18nKey = Abilities[a.id].split("_").filter(f => f).map((f, i) => i ? `${f[0]}${f.slice(1).toLowerCase()}` : f.toLowerCase()).join("") as string;
+    // console.log(i18nKey);
     a.name = a.id ? `${i18next.t(`ability:${i18nKey}.name`) as string}` : "";
+    var safe = a.id ? `${i18next.t(`ability:${i18nKey}.name`) as string}` : "";
     a.description = a.id ? i18next.t(`ability:${i18nKey}.description`) as string : "";
 
     // pokemon id 세팅
@@ -59,7 +62,7 @@ const generateAbilityJsonFiles = () => {
     const abilityData: AbilityData = {
       _id: Abilities[a.id].toLowerCase(),
       name: NAME,
-      koName: a.name,
+      koName: safe,
       released: a.nameAppend,
       description: a.description,
       generation: a.generation,
