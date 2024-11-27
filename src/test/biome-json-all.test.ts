@@ -15,9 +15,9 @@ import * as Utils from "#app/test/test-util.ts";
 const generateBiomeJsonFiles = () => {
     var allbiomes: BiomeData[] = [];
     for (const b of Object.keys(biomePokemonPools)) {
-        i18next.changeLanguage("en");
+        // i18next.changeLanguage("en");
         const NAME = getBiomeName(b);
-        i18next.changeLanguage("ko");
+        // i18next.changeLanguage("ko");
         const KONAME = getBiomeName(b);
 
         const biomeData: BiomeData = {
@@ -50,15 +50,8 @@ export const getNativePokemonDatas = (b: string): NativePokemonData[] => {
                     for (let i = 0; i < y.length; i++) {
                         var pokemonspe = getPokemonSpecies(y[i][0]);
                         if (pokemonspe.forms.length !== 0) {
-                            for (const form of pokemonspe.forms) {
-                                const tail = form.formKey !== "" ? "_" + form.formKey.toLowerCase().replace(/ |-/g, "_") : "";
-                                if (tail === "_mega" || tail === "_gigantamax") {
-                                    continue;
-                                }
-                                if (!Utils.containsFileNamesSetWithForm(form, pokemonspe)) {
-                                    continue;
-                                }
-                                ret.push(Utils.getPokemonIdWithForm(form, pokemonspe));
+                            if (Utils.containsFileNamesSetWithForm(pokemonspe.forms[0], pokemonspe)) {
+                                ret.push(Utils.getPokemonIdWithForm(pokemonspe.forms[0], pokemonspe));
                             }
                         } else {
                             if (!Utils.containsFileNamesSet(pokemonspe)) {
@@ -70,15 +63,8 @@ export const getNativePokemonDatas = (b: string): NativePokemonData[] => {
                 } else {
                     var pokemonspe = getPokemonSpecies(x);
                     if (pokemonspe.forms.length !== 0) {
-                        for (const form of pokemonspe.forms) {
-                            const tail = form.formKey !== "" ? "_" + form.formKey.toLowerCase().replace(/ |-/g, "_") : "";
-                            if (tail === "_mega" || tail === "_gigantamax") {
-                                continue;
-                            }
-                            if (!Utils.containsFileNamesSetWithForm(form, pokemonspe)) {
-                                continue;
-                            }
-                            ret.push(Utils.getPokemonIdWithForm(form, pokemonspe));
+                        if (Utils.containsFileNamesSetWithForm(pokemonspe.forms[0], pokemonspe)) {
+                            ret.push(Utils.getPokemonIdWithForm(pokemonspe.forms[0], pokemonspe));
                         }
                     } else {
                         if (!Utils.containsFileNamesSet(pokemonspe)) {
@@ -116,11 +102,8 @@ export const getTrainerDatas = (b: string): TrainerData[] => {
                 for (var c in ll[spe]) {
                     var pokemonspe = getPokemonSpecies(ll[spe[c]]);
                     if (pokemonspe.forms.length !== 0) {
-                        for (const form of pokemonspe.forms) {
-                            if (!Utils.containsFileNamesSetWithForm(form, pokemonspe)) {
-                                continue;
-                            }
-                            ret2.push(Utils.getPokemonIdWithForm(form, pokemonspe));
+                        if (Utils.containsFileNamesSetWithForm(pokemonspe.forms[0], pokemonspe)) {
+                            ret2.push(Utils.getPokemonIdWithForm(pokemonspe.forms[0], pokemonspe));
                         }
                     } else {
                         if (!Utils.containsFileNamesSet(pokemonspe)) {
@@ -132,11 +115,8 @@ export const getTrainerDatas = (b: string): TrainerData[] => {
             } else {
                 var pokemonspe = getPokemonSpecies(ll[spe]);
                 if (pokemonspe.forms.length !== 0) {
-                    for (const form of pokemonspe.forms) {
-                        if (!Utils.containsFileNamesSetWithForm(form, pokemonspe)) {
-                            continue;
-                        }
-                        ret2.push(Utils.getPokemonIdWithForm(form, pokemonspe));
+                    if (Utils.containsFileNamesSetWithForm(pokemonspe.forms[0], pokemonspe)) {
+                        ret2.push(Utils.getPokemonIdWithForm(pokemonspe.forms[0], pokemonspe));
                     }
                 } else {
                     if (!Utils.containsFileNamesSet(pokemonspe)) {

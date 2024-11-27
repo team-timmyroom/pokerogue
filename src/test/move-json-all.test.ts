@@ -22,7 +22,7 @@ const generateMoveJsonFiles = () => {
       continue;
     }
     const NAME = move.name;
-    i18next.changeLanguage("ko");
+    // i18next.changeLanguage("ko");
     const i18nKey = Moves[move.id].split("_").filter(f => f).map((f, i) => i ? `${f[0]}${f.slice(1).toLowerCase()}` : f.toLowerCase()).join("") as unknown as string;
     move.name = move.id ? `${i18next.t(`move:${i18nKey}.name`)}` : "";
     move.effect = move.id ? `${i18next.t(`move:${i18nKey}.effect`)}` : "";

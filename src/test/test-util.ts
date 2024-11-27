@@ -78,7 +78,7 @@ export const generateCommonId = (species: Species) => {
 };
 
 export const getSName = (lan: string, species: PokemonSpecies) => {
-    i18next.changeLanguage(lan);
+    // i18next.changeLanguage(lan);
     return i18next.t(`pokemon:${Species[species.speciesId].toLowerCase()}`);
 }
 
@@ -87,7 +87,7 @@ export const getName = (lan: string, species: PokemonSpecies, formIndex: integer
 
     const formKey = species.forms[formIndex].formKey;
     
-    i18next.changeLanguage(lan);
+    // i18next.changeLanguage(lan);
     if (!soso.includes(formKey)) {
         // console.log("dgs" + " " + formKey + " " + Species[species.speciesId]);
         const formText = capitalizeString(formKey, "-", false, false) || "";
@@ -129,7 +129,7 @@ export const getName = (lan: string, species: PokemonSpecies, formIndex: integer
         }
 
         if (key) {
-            i18next.changeLanguage(lan);
+            // i18next.changeLanguage(lan);
             return i18next.t(`battlePokemonForm:${key}`, { pokemonName: species.name });
         }
     }

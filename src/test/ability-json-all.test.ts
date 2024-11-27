@@ -31,13 +31,18 @@ const generateAbilityJsonFiles = () => {
       continue;
     }
     const NAME = a.name;
-    i18next.changeLanguage("ko");
+    // i18next.changeLanguage("ko");
     // i18next.loadLanguages("ko");
-    const i18nKey = Abilities[a.id].split("_").filter(f => f).map((f, i) => i ? `${f[0]}${f.slice(1).toLowerCase()}` : f.toLowerCase()).join("") as string;
+    var i18nKey = Abilities[a.id]?.split("_").filter(f => f).map((f, i) => i > 0 ? `${f[0].toUpperCase()}${f.slice(1).toLowerCase()}` : f.toLowerCase()).join("");
     // console.log(i18nKey);
-    a.name = a.id ? `${i18next.t(`ability:${i18nKey}.name`) as string}` : "";
+    if (i18nKey === "static") {
+      i18nKey = "staticAbility";
+    }
+    var NNAME = a.id ? `${i18next.t(`ability:${i18nKey}.name`) as string}` : "";
     var safe = a.id ? `${i18next.t(`ability:${i18nKey}.name`) as string}` : "";
-    a.description = a.id ? i18next.t(`ability:${i18nKey}.description`) as string : "";
+    var DESCRIPTION = a.id ? i18next.t(`ability:${i18nKey}.description`) as string : "";
+    // console.log(NNAME)
+    // console.log(DESCRIPTION)
 
     // pokemon id 세팅
     const ret: string[] = [];
@@ -61,10 +66,10 @@ const generateAbilityJsonFiles = () => {
 
     const abilityData: AbilityData = {
       _id: Abilities[a.id].toLowerCase(),
-      name: NAME,
+      name: NNAME,
       koName: safe,
       released: a.nameAppend,
-      description: a.description,
+      description: DESCRIPTION,
       generation: a.generation,
       pokemonIds: ret,
       isBypassFaint: a.isBypassFaint ? a.isBypassFaint : false,

@@ -125,7 +125,7 @@ const generatePokemonJsonFiles = () => {
 
         // form에 따른 포켓몬 정보 파싱
         // formkoName
-        i18next.changeLanguage("ko");
+        // i18next.changeLanguage("ko");
         const FORMKONAME = i18next.t(`pokemon:${Species[form.speciesId].toLowerCase()}`) + tail;
 
         // formtypes
@@ -259,7 +259,7 @@ const generatePokemonJsonFiles = () => {
 
       // 일반적인 포켓몬 정보 파싱
       // koName
-      i18next.changeLanguage("ko");
+      // i18next.changeLanguage("ko");
       const KONAME = i18next.t(`pokemon:${Species[pokemon.speciesId].toLowerCase()}`);
 
       // types
