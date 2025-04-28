@@ -71,7 +71,7 @@ const generateAbilityJsonFiles = () => {
       _id: Abilities[a.id].toLowerCase(),
       name: NNAME,
       koName: safe,
-      released: a.nameAppend,
+      released: a.nameAppend,  // 테스트 돌릴 때는 Ability 클래스의 nameAppend 필드를 public으로 변경해줘야 함
       description: DESCRIPTION,
       generation: a.generation,
       pokemonIds: ret,

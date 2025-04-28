@@ -99,7 +99,7 @@ const generateMoveJsonFiles = () => {
       effectChance: move.chance,
       prioirty: move.priority,
       generation: move.generation,
-      released: move.nameAppend,
+      released: move.nameAppend,  // 테스트 돌릴 때는 Move 클래스의 nameAppend 필드를 public으로 변경해줘야 함
       flags: flagss,
       pokemonIds: mmm,
     };
