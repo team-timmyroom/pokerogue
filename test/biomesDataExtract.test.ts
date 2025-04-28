@@ -8,7 +8,7 @@ import { Species } from "#app/enums/species";
 import { Biome } from "#app/enums/biome";
 import { signatureSpecies } from "#app/data/balance/signature-species";
 import { TrainerType } from "#enums/trainer-type";
-import * as Utils from "#app/test/testUtils";
+import * as Utils from "#test/testUtils";
 
 // 각 바이옴에 대해 JSON 파일을 생성하는 함수
 const generateBiomeJsonFiles = () => {

@@ -6,7 +6,7 @@ import { Abilities } from "#app/enums/abilities";
 import { allAbilities } from "#app/data/ability";
 import { allSpecies } from "#app/data/pokemon-species";
 import { starterPassiveAbilities } from "#app/data/balance/passives";
-import * as Utils from "#app/test/testUtils";
+import * as Utils from "#test/testUtils";
 
 export interface AbilityData {
   _id: string;

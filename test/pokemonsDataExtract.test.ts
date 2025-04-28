@@ -16,8 +16,8 @@ import { Stat } from "#app/enums/stat";
 import { tmSpecies } from "#app/data/balance/tms";
 import { generateEvolutionChains, getEvolutionsById } from "./pokemonEvolutionsDataExtract";
 import { generateFormChangeInfo, FormChangeInfo } from "./pokemonFormsDataExtract";
-import { getFileNameSet } from "#app/test/testUtils";
-import * as Utils from "#app/test/testUtils";
+import { getFileNameSet } from "#test/testUtils";
+import * as Utils from "#test/testUtils";
 
 // 각 포켓몬에 대해 JSON 파일을 생성하는 함수
 const generatePokemonJsonFiles = () => {

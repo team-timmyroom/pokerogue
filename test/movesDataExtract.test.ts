@@ -13,7 +13,7 @@ import { allSpecies } from "#app/data/pokemon-species";
 import { speciesEggMoves } from "#app/data/balance/egg-moves";
 import { pokemonSpeciesLevelMoves } from "#app/data/balance/pokemon-level-moves";
 import { tmSpecies } from "#app/data/balance/tms";
-import * as Utils from "#app/test/testUtils";
+import * as Utils from "#test/testUtils";
 
 // 각 기술에 대해 JSON 파일을 생성하는 함수
 const generateMoveJsonFiles = () => {
