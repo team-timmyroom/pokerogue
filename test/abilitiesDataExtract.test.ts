@@ -12,7 +12,7 @@ export interface AbilityData {
   _id: string;
   name: string;
   koName: string;
-  //   released: string,
+  released: string,
   description: string;
   generation: number;
   pokemonIds: string[];
@@ -71,7 +71,7 @@ const generateAbilityJsonFiles = () => {
       _id: Abilities[a.id].toLowerCase(),
       name: NNAME,
       koName: safe,
-      //   released: a.nameAppend,
+      released: a.nameAppend,
       description: DESCRIPTION,
       generation: a.generation,
       pokemonIds: ret,
